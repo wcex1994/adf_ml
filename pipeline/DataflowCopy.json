@@ -110,7 +110,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "Trasformation",
+						"referenceName": "Transformation",
 						"type": "DataFlowReference"
 					},
 					"compute": {
