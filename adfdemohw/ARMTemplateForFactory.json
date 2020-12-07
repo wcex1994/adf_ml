@@ -205,7 +205,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "Trasformation",
+								"referenceName": "Transformation",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
@@ -228,7 +228,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AzureSqlDatabaseSourceDatasetEntity')]",
 				"[concat(variables('factoryId'), '/datasets/StagingParquet')]",
-				"[concat(variables('factoryId'), '/dataflows/Trasformation')]"
+				"[concat(variables('factoryId'), '/dataflows/Transformation')]"
 			]
 		},
 		{
@@ -780,7 +780,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Trasformation')]",
+			"name": "[concat(parameters('factoryName'), '/Transformation')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
