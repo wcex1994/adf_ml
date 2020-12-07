@@ -11,6 +11,9 @@
 		"AzureDatabricksLab_accessToken": {
 			"value": ""
 		},
+		"AzureMLKJ_servicePrincipalKey": {
+			"value": ""
+		},
 		"sinkBlob_connectionString": {
 			"value": ""
 		},
@@ -19,6 +22,18 @@
 		},
 		"ADLS2_properties_typeProperties_url": {
 			"value": "https://adls2demohw.dfs.core.windows.net"
+		},
+		"AzureMLKJ_properties_typeProperties_subscriptionId": {
+			"value": "21391ca8-1558-4643-8c29-5a15fa2a0324"
+		},
+		"AzureMLKJ_properties_typeProperties_resourceGroupName": {
+			"value": "kjml"
+		},
+		"AzureMLKJ_properties_typeProperties_servicePrincipalId": {
+			"value": "415c5eb6-ec05-488b-9be0-1ed4a295bbf9"
+		},
+		"AzureMLKJ_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
 		},
 		"Public Blob Storage_sasUri": {
 			"value": ""

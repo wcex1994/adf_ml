@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accessToken' of 'AzureDatabricksLab'"
 		},
+		"AzureMLKJ_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureMLKJ'"
+		},
 		"sinkBlob_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'sinkBlob'"
@@ -26,6 +30,22 @@
 		"ADLS2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adls2demohw.dfs.core.windows.net"
+		},
+		"AzureMLKJ_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "21391ca8-1558-4643-8c29-5a15fa2a0324"
+		},
+		"AzureMLKJ_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "kjml"
+		},
+		"AzureMLKJ_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "415c5eb6-ec05-488b-9be0-1ed4a295bbf9"
+		},
+		"AzureMLKJ_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
 		},
 		"Public Blob Storage_sasUri": {
 			"type": "secureString",
@@ -74,6 +94,27 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureMLKJ')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureMLService",
+				"typeProperties": {
+					"subscriptionId": "[parameters('AzureMLKJ_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('AzureMLKJ_properties_typeProperties_resourceGroupName')]",
+					"mlWorkspaceName": "kjml",
+					"servicePrincipalId": "[parameters('AzureMLKJ_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureMLKJ_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureMLKJ_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Public Blob Storage')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -111,6 +152,39 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AML - Work in Progress')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Machine Learning Execute Pipeline1",
+						"type": "AzureMLExecutePipeline",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"mlPipelineId": "ea57bf28-270a-4751-90c4-dc41482c5985"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureMLKJ",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureMLKJ')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabaseSourceDatasetEntity')]",

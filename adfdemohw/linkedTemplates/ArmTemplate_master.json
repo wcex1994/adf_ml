@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accessToken' of 'AzureDatabricksLab'"
 		},
+		"AzureMLKJ_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureMLKJ'"
+		},
 		"sinkBlob_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'sinkBlob'"
@@ -26,6 +30,22 @@
 		"ADLS2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adls2demohw.dfs.core.windows.net"
+		},
+		"AzureMLKJ_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "21391ca8-1558-4643-8c29-5a15fa2a0324"
+		},
+		"AzureMLKJ_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "kjml"
+		},
+		"AzureMLKJ_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "415c5eb6-ec05-488b-9be0-1ed4a295bbf9"
+		},
+		"AzureMLKJ_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
 		},
 		"Public Blob Storage_sasUri": {
 			"type": "secureString",
@@ -64,6 +84,9 @@
 					"AzureDatabricksLab_accessToken": {
 						"value": "[parameters('AzureDatabricksLab_accessToken')]"
 					},
+					"AzureMLKJ_servicePrincipalKey": {
+						"value": "[parameters('AzureMLKJ_servicePrincipalKey')]"
+					},
 					"sinkBlob_connectionString": {
 						"value": "[parameters('sinkBlob_connectionString')]"
 					},
@@ -72,6 +95,18 @@
 					},
 					"ADLS2_properties_typeProperties_url": {
 						"value": "[parameters('ADLS2_properties_typeProperties_url')]"
+					},
+					"AzureMLKJ_properties_typeProperties_subscriptionId": {
+						"value": "[parameters('AzureMLKJ_properties_typeProperties_subscriptionId')]"
+					},
+					"AzureMLKJ_properties_typeProperties_resourceGroupName": {
+						"value": "[parameters('AzureMLKJ_properties_typeProperties_resourceGroupName')]"
+					},
+					"AzureMLKJ_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('AzureMLKJ_properties_typeProperties_servicePrincipalId')]"
+					},
+					"AzureMLKJ_properties_typeProperties_tenant": {
+						"value": "[parameters('AzureMLKJ_properties_typeProperties_tenant')]"
 					},
 					"Public Blob Storage_sasUri": {
 						"value": "[parameters('Public Blob Storage_sasUri')]"
