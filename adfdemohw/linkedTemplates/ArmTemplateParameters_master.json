@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adfdemohw"
+		},
+		"ADLS2_accountKey": {
+			"value": ""
+		},
+		"AzureDatabricksLab_accessToken": {
+			"value": ""
+		},
+		"sinkBlob_connectionString": {
+			"value": ""
+		},
+		"sqldb_connectionString": {
+			"value": ""
+		},
+		"ADLS2_properties_typeProperties_url": {
+			"value": "https://adls2demohw.dfs.core.windows.net"
+		},
+		"Public Blob Storage_sasUri": {
+			"value": ""
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
