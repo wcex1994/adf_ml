@@ -238,7 +238,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Execute Pipeline1",
+						"name": "DataflowCopy",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"userProperties": [],
@@ -252,11 +252,11 @@
 						}
 					},
 					{
-						"name": "Execute Pipeline2",
+						"name": "Transformation with Databricks",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
-								"activity": "Execute Pipeline1",
+								"activity": "DataflowCopy",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -273,11 +273,11 @@
 						}
 					},
 					{
-						"name": "Execute Pipeline3",
+						"name": "AML",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
-								"activity": "Execute Pipeline2",
+								"activity": "Transformation with Databricks",
 								"dependencyConditions": [
 									"Succeeded"
 								]
