@@ -1,0 +1,43 @@
+{
+	"name": "StagingParquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sinkBlob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "file.parquet",
+				"folderPath": "dataflow",
+				"container": "stagingdataflow"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "ProductCategoryID",
+				"type": "INT32"
+			},
+			{
+				"name": "ParentProductCategoryID",
+				"type": "INT32"
+			},
+			{
+				"name": "Name",
+				"type": "UTF8"
+			},
+			{
+				"name": "rowguid",
+				"type": "UTF8"
+			},
+			{
+				"name": "ModifiedDate",
+				"type": "INT96"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

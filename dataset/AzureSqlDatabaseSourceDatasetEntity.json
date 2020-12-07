@@ -1,0 +1,37 @@
+{
+	"name": "AzureSqlDatabaseSourceDatasetEntity",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sqldb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "ProductCategoryID",
+				"type": "Int32"
+			},
+			{
+				"name": "ParentProductCategoryID",
+				"type": "Int32"
+			},
+			{
+				"name": "Name",
+				"type": "String"
+			},
+			{
+				"name": "rowguid",
+				"type": "Guid"
+			},
+			{
+				"name": "ModifiedDate",
+				"type": "DateTime"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[SalesLT].[ProductCategory]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
