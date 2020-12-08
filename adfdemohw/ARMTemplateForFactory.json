@@ -185,7 +185,7 @@
 						]
 					},
 					{
-						"name": "Trasformation",
+						"name": "Transformation",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
