@@ -1,0 +1,20 @@
+{
+	"name": "DestinationDataset_bts",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLS2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "sales",
+				"fileSystem": "stagingdataflow"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
