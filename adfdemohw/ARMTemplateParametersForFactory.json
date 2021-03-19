@@ -17,6 +17,9 @@
 		"AzureSqlDatabase1Demo_connectionString": {
 			"value": ""
 		},
+		"AzureSynapseAnalytics1_connectionString": {
+			"value": ""
+		},
 		"sinkBlob_connectionString": {
 			"value": ""
 		},
