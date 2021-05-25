@@ -35,6 +35,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'sqldb'"
 		},
+		"synapseADLS2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'synapseADLS2'"
+		},
+		"adls2synapse_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'adls2synapse'"
+		},
 		"ADLS2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adls2demohw.dfs.core.windows.net"
@@ -58,6 +66,14 @@
 		"Public Blob Storage_sasUri": {
 			"type": "secureString",
 			"metadata": "Secure string for 'sasUri' of 'Public Blob Storage'"
+		},
+		"synapseADLS2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sqlcicd.dfs.core.windows.net"
+		},
+		"adls2synapse_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://acltesthw.dfs.core.windows.net"
 		},
 		"containerUri": {
 			"type": "string",
@@ -107,6 +123,12 @@
 					"sqldb_connectionString": {
 						"value": "[parameters('sqldb_connectionString')]"
 					},
+					"synapseADLS2_accountKey": {
+						"value": "[parameters('synapseADLS2_accountKey')]"
+					},
+					"adls2synapse_accountKey": {
+						"value": "[parameters('adls2synapse_accountKey')]"
+					},
 					"ADLS2_properties_typeProperties_url": {
 						"value": "[parameters('ADLS2_properties_typeProperties_url')]"
 					},
@@ -124,6 +146,12 @@
 					},
 					"Public Blob Storage_sasUri": {
 						"value": "[parameters('Public Blob Storage_sasUri')]"
+					},
+					"synapseADLS2_properties_typeProperties_url": {
+						"value": "[parameters('synapseADLS2_properties_typeProperties_url')]"
+					},
+					"adls2synapse_properties_typeProperties_url": {
+						"value": "[parameters('adls2synapse_properties_typeProperties_url')]"
 					}
 				}
 			},

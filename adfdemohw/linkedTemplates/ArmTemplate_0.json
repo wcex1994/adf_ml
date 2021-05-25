@@ -35,6 +35,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'sqldb'"
 		},
+		"synapseADLS2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'synapseADLS2'"
+		},
+		"adls2synapse_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'adls2synapse'"
+		},
 		"ADLS2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adls2demohw.dfs.core.windows.net"
@@ -58,6 +66,14 @@
 		"Public Blob Storage_sasUri": {
 			"type": "secureString",
 			"metadata": "Secure string for 'sasUri' of 'Public Blob Storage'"
+		},
+		"synapseADLS2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sqlcicd.dfs.core.windows.net"
+		},
+		"adls2synapse_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://acltesthw.dfs.core.windows.net"
 		}
 	},
 	"variables": {
@@ -96,7 +112,8 @@
 					},
 					"newClusterNodeType": "Standard_DS3_v2",
 					"newClusterNumOfWorker": "2",
-					"newClusterVersion": "5.5.x-scala2.11"
+					"newClusterVersion": "5.5.x-scala2.11",
+					"newClusterInitScripts": []
 				}
 			},
 			"dependsOn": []
@@ -183,6 +200,40 @@
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
 					"connectionString": "[parameters('sqldb_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/synapseADLS2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('synapseADLS2_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('synapseADLS2_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adls2synapse')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('adls2synapse_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('adls2synapse_accountKey')]"
+					}
 				}
 			},
 			"dependsOn": []
@@ -586,120 +637,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Public Blob Storage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingParquet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "sinkBlob",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "file.parquet",
-						"folderPath": "dataflow",
-						"container": "stagingdataflow"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": [
-					{
-						"name": "ProductCategoryID",
-						"type": "INT32"
-					},
-					{
-						"name": "ParentProductCategoryID",
-						"type": "INT32"
-					},
-					{
-						"name": "Name",
-						"type": "UTF8"
-					},
-					{
-						"name": "rowguid",
-						"type": "UTF8"
-					},
-					{
-						"name": "ModifiedDate",
-						"type": "INT96"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/sinkBlob')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyPipeline_ctcdemo')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy_bts",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "SalesLT.SalesOrderHeader"
-							},
-							{
-								"name": "Destination",
-								"value": "stagingdataflow/sales/"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "ParquetSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "ParquetWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"validateDataConsistency": false
-						},
-						"inputs": [
-							{
-								"referenceName": "SourceDataset_bts",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DestinationDataset_bts",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_bts')]",
-				"[concat(variables('factoryId'), '/datasets/DestinationDataset_bts')]"
 			]
 		}
 	]

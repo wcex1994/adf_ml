@@ -26,6 +26,12 @@
 		"sqldb_connectionString": {
 			"value": ""
 		},
+		"synapseADLS2_accountKey": {
+			"value": ""
+		},
+		"adls2synapse_accountKey": {
+			"value": ""
+		},
 		"ADLS2_properties_typeProperties_url": {
 			"value": "https://adls2demohw.dfs.core.windows.net"
 		},
@@ -43,6 +49,12 @@
 		},
 		"Public Blob Storage_sasUri": {
 			"value": ""
+		},
+		"synapseADLS2_properties_typeProperties_url": {
+			"value": "https://sqlcicd.dfs.core.windows.net"
+		},
+		"adls2synapse_properties_typeProperties_url": {
+			"value": "https://acltesthw.dfs.core.windows.net"
 		}
 	}
 }
