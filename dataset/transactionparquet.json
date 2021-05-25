@@ -1,0 +1,32 @@
+{
+	"name": "transactionparquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adls2synapse",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "edlmtest"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Customer_Id",
+				"type": "INT64"
+			},
+			{
+				"name": "Record_Date",
+				"type": "UTF8"
+			},
+			{
+				"name": "Action",
+				"type": "UTF8"
+			}
+		]
+	}
+}
