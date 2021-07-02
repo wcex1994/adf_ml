@@ -27,6 +27,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSynapseAnalytics1'"
 		},
+		"adls2synapse_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'adls2synapse'"
+		},
 		"sinkBlob_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'sinkBlob'"
@@ -39,13 +43,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'synapseADLS2'"
 		},
-		"adls2synapse_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'adls2synapse'"
-		},
 		"ADLS2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adls2demohw.dfs.core.windows.net"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://fhirexporthwkv.vault.azure.net/"
 		},
 		"AzureMLKJ_properties_typeProperties_subscriptionId": {
 			"type": "string",
@@ -67,13 +71,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'sasUri' of 'Public Blob Storage'"
 		},
-		"synapseADLS2_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://sqlcicd.dfs.core.windows.net"
-		},
 		"adls2synapse_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://acltesthw.dfs.core.windows.net"
+		},
+		"synapseADLS2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sqlcicd.dfs.core.windows.net"
 		}
 	},
 	"variables": {
@@ -114,6 +118,19 @@
 					"newClusterNumOfWorker": "2",
 					"newClusterVersion": "5.5.x-scala2.11",
 					"newClusterInitScripts": []
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
 				}
 			},
 			"dependsOn": []
@@ -179,6 +196,23 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/adls2synapse')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('adls2synapse_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('adls2synapse_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/sinkBlob')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -216,23 +250,6 @@
 					"accountKey": {
 						"type": "SecureString",
 						"value": "[parameters('synapseADLS2_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/adls2synapse')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('adls2synapse_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('adls2synapse_accountKey')]"
 					}
 				}
 			},
@@ -608,35 +625,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1Demo')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SourceFilesDataset')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Connection to your source files in Azure Blob Store.",
-				"linkedServiceName": {
-					"referenceName": "Public Blob Storage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Product.csv",
-						"folderPath": "source",
-						"container": "data"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Public Blob Storage')]"
 			]
 		}
 	]

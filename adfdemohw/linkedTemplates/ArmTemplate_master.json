@@ -27,6 +27,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSynapseAnalytics1'"
 		},
+		"adls2synapse_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'adls2synapse'"
+		},
 		"sinkBlob_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'sinkBlob'"
@@ -39,13 +43,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'synapseADLS2'"
 		},
-		"adls2synapse_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'adls2synapse'"
-		},
 		"ADLS2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adls2demohw.dfs.core.windows.net"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://fhirexporthwkv.vault.azure.net/"
 		},
 		"AzureMLKJ_properties_typeProperties_subscriptionId": {
 			"type": "string",
@@ -67,13 +71,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'sasUri' of 'Public Blob Storage'"
 		},
-		"synapseADLS2_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://sqlcicd.dfs.core.windows.net"
-		},
 		"adls2synapse_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://acltesthw.dfs.core.windows.net"
+		},
+		"synapseADLS2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sqlcicd.dfs.core.windows.net"
 		},
 		"containerUri": {
 			"type": "string",
@@ -117,6 +121,9 @@
 					"AzureSynapseAnalytics1_connectionString": {
 						"value": "[parameters('AzureSynapseAnalytics1_connectionString')]"
 					},
+					"adls2synapse_accountKey": {
+						"value": "[parameters('adls2synapse_accountKey')]"
+					},
 					"sinkBlob_connectionString": {
 						"value": "[parameters('sinkBlob_connectionString')]"
 					},
@@ -126,11 +133,11 @@
 					"synapseADLS2_accountKey": {
 						"value": "[parameters('synapseADLS2_accountKey')]"
 					},
-					"adls2synapse_accountKey": {
-						"value": "[parameters('adls2synapse_accountKey')]"
-					},
 					"ADLS2_properties_typeProperties_url": {
 						"value": "[parameters('ADLS2_properties_typeProperties_url')]"
+					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
 					},
 					"AzureMLKJ_properties_typeProperties_subscriptionId": {
 						"value": "[parameters('AzureMLKJ_properties_typeProperties_subscriptionId')]"
@@ -147,11 +154,11 @@
 					"Public Blob Storage_sasUri": {
 						"value": "[parameters('Public Blob Storage_sasUri')]"
 					},
-					"synapseADLS2_properties_typeProperties_url": {
-						"value": "[parameters('synapseADLS2_properties_typeProperties_url')]"
-					},
 					"adls2synapse_properties_typeProperties_url": {
 						"value": "[parameters('adls2synapse_properties_typeProperties_url')]"
+					},
+					"synapseADLS2_properties_typeProperties_url": {
+						"value": "[parameters('synapseADLS2_properties_typeProperties_url')]"
 					}
 				}
 			},
